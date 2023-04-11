@@ -1,5 +1,9 @@
 import './style.scss';
 
+const form = document.querySelector('form');
+const input = document.querySelector('input');
+const btn = document.querySelector('button');
+
 const getData = async (query) => {
   try {
     const response = await fetch(
@@ -19,4 +23,11 @@ const getData = async (query) => {
   }
 };
 
-getData('london');
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const { value } = input;
+  if (value.trim() === '') return;
+  getData(value);
+};
+
+form.addEventListener('submit', handleSubmit);
