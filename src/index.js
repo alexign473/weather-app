@@ -3,6 +3,10 @@ import './style.scss';
 const form = document.querySelector('form');
 const input = document.querySelector('input');
 const btn = document.querySelector('button');
+const $city = document.querySelector('#city');
+const $country = document.querySelector('#country');
+const $localTime = document.querySelector('#localTime');
+const $tempC = document.querySelector('#tempC');
 
 const getData = async (query) => {
   try {
@@ -23,11 +27,23 @@ const getData = async (query) => {
   }
 };
 
-const handleSubmit = (e) => {
+getData('tokyo');
+
+const handleSubmit = async (e) => {
   e.preventDefault();
   const { value } = input;
   if (value.trim() === '') return;
-  getData(value);
+
+  const data = await getData(value);
+  if (!data) return;
+
+  const { location, current } = data;
+  const { name, country, localtime } = location;
+  const { temp_c: tempC } = current;
+  $city.textContent = name;
+  $country.textContent = country;
+  $localTime.textContent = localtime;
+  $tempC.textContent = tempC;
 };
 
 form.addEventListener('submit', handleSubmit);
