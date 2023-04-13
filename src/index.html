@@ -21,14 +21,15 @@
   </head>
   <body>
     <aside class="sidebar">
-      <i class="close fa-solid fa-xmark"></i>
-      <form class="sidebar__searchbar">
+      <i id="closeSidebarBtn" class="close fa-solid fa-xmark"></i>
+      <form id="searchForm" class="sidebar__searchbar">
         <div class="sidebar__input">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" placeholder="search location" />
         </div>
         <button>Search</button>
       </form>
+      <h2 id="error" class="sidebar__error"></h2>
     </aside>
 
     <div id="viewApp" class="wrapper">
