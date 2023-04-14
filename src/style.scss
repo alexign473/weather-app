@@ -229,6 +229,7 @@ button {
 
   &__date,
   &__location {
+    text-align: center;
     font-size: 1.125rem;
   }
 
@@ -284,7 +285,7 @@ h2 {
 
 .forecast {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 32px 26px;
   padding: 30px 30px 50px;
 

@@ -20,13 +20,37 @@ const App = () => {
   const $searchForm = document.querySelector('#searchForm');
   const $searchInput = $searchForm.querySelector('input');
 
+  const $forecast = document.querySelector('#forecast');
+
+  const createForecastCard = (item) => {
+    console.log(item);
+    const card = document.createElement('div');
+    card.className = 'forecast-card';
+    card.innerHTML = `
+              <p>${item.date}</p>
+              <img src="./assets/Thunderstorm.png" alt="${item.day.condition.text}" />
+              <div>${item.day.condition.text}</div>
+              <div class="forecast-card__info">
+                <span>${item.day.maxtemp_c}&deg;C</span>
+                <span>${item.day.mintemp_c}&deg;C</span>
+              </div>
+    `;
+    return card;
+  };
+
+  const renderForecast = (forecast) => {
+    const itemsToShow = forecast.slice(1);
+    $forecast.innerHTML = '';
+    $forecast.append(...itemsToShow.map(createForecastCard));
+  };
+
   const updateView = () => {
     if (!state.data) return;
     const { current, location, forecast } = state.data;
     $currTemp.textContent = current.temp_c;
     $currStatus.textContent = current.condition.text;
     $currLocation.textContent = `${location.name}, ${location.country}`;
-    console.log(forecast.forecastday);
+    renderForecast(forecast.forecastday);
   };
 
   const toggleSidebar = (open) => {
@@ -65,7 +89,7 @@ const App = () => {
     }
   };
 
-  //   getData('tokyo');
+  getData('tokyo');
 
   const handleSubmit = (e) => {
     e.preventDefault();
