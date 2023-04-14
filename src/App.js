@@ -8,7 +8,6 @@ const App = () => {
     data: null,
   };
 
-  const $viewApp = document.querySelector('#viewApp');
   const $currTemp = document.querySelector('#currTemp');
   const $currStatus = document.querySelector('#currStatus');
   const $currLocation = document.querySelector('#currLocation');
@@ -17,7 +16,7 @@ const App = () => {
   const $closeSidebarBtn = document.querySelector('#closeSidebarBtn');
   const $error = document.querySelector('#error');
   const $searchForm = document.querySelector('#searchForm');
-  const $input = $searchForm.querySelector('input');
+  const $searchInput = $searchForm.querySelector('input');
 
   const updateView = () => {
     if (!state.data) return;
@@ -28,8 +27,18 @@ const App = () => {
     console.log(forecast.forecastday);
   };
 
+  const setLoadingBtn = (loading) => {
+    const $searchBtn = $searchForm.querySelector('button');
+    const $span = $searchBtn.querySelector('span');
+    const $spinner = $searchBtn.querySelector('i');
+    $searchBtn.disabled = loading;
+    $spinner.classList.toggle('hidden', !loading);
+    $span.classList.toggle('hidden', loading);
+  };
+
   const getData = async (query) => {
     state.loading = true;
+    setLoadingBtn(true);
     $error.textContent = '';
     console.log('loading', state);
 
@@ -44,15 +53,16 @@ const App = () => {
       $error.textContent = err;
     } finally {
       state.loading = false;
+      setLoadingBtn(false);
       console.log('finally', state);
     }
   };
 
-  getData('tokyo');
+  //   getData('tokyo');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { value } = $input;
+    const { value } = $searchInput;
     if (value.trim() === '') return;
     console.log(value);
     getData(value);

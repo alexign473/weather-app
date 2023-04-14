@@ -128,8 +128,20 @@ button {
     }
   }
 
+  &__error {
+    margin: 1.5rem 0;
+  }
+
+  button {
+    min-width: 80px;
+    &:disabled {
+      background-color: #2b33a5;
+    }
+  }
+
   @media (width > $bp-sm) {
     width: var(--w-sidebar);
+    padding: 20px 46px;
   }
 }
 
