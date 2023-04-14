@@ -5,8 +5,110 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
   <script defer src="main.js"></script></head>
-  <body>
-    <h1>Hello</h1>
+  <body class="preload">
+    <aside class="sidebar">
+      <i id="closeSidebarBtn" class="close fa-solid fa-xmark"></i>
+      <form id="searchForm" class="sidebar__searchbar">
+        <div class="sidebar__input">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="search location" />
+        </div>
+        <button>
+          <i class="fa-solid fa-spinner fa-spin hidden"></i>
+          <span> Search </span>
+        </button>
+      </form>
+      <h2 class="sidebar__error"></h2>
+    </aside>
+
+    <div id="viewApp" class="wrapper">
+      <div class="weather-current">
+        <div class="weather-current__searchbar">
+          <button id="openSidebarBtn">Search for places</button>
+          <span></span>
+        </div>
+        <div class="weather-current__content">
+          <div class="weather-current__img">
+            <img id="currImg" src="./assets/Shower.png" alt="" />
+          </div>
+          <div class="weather-current__temp">
+            <span id="currTemp">15</span>&deg;C
+          </div>
+          <div id="currStatus" class="weather-current__status">Shower</div>
+          <div class="weather-current__date">
+            Today &#183; <span id="currDate">Fri, 5 Jun</span>
+          </div>
+          <div class="weather-current__location">
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="currLocation">Helsinki</span>
+          </div>
+        </div>
+      </div>
+      <main class="weather-info">
+        <div class="container">
+          <!-- <header class="temperature-type">
+            <button id="typeC">&deg;C</button>
+            <button id="typeF">&deg;F</button>
+          </header> -->
+          <div id="forecast" class="forecast">
+            <template>
+              <div class="forecast-card">
+                <p>Tomorrow</p>
+                <img src="./assets/Clear.png" alt="" />
+                <div class="forecast-card__info">
+                  <span>16&deg;C</span>
+                  <span>11&deg;C</span>
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <h2>Today's Highlights</h2>
+
+          <div class="daily-detail">
+            <div class="daily-detail-card">
+              <p>Wind status</p>
+              <p class="daily-detail-card__info">
+                <span id="wind">7</span> mph
+              </p>
+            </div>
+            <div class="daily-detail-card">
+              <p>Humidity</p>
+              <p class="daily-detail-card__info">
+                <span id="humidity">84</span>%
+              </p>
+            </div>
+            <div class="daily-detail-card">
+              <p>Visibility</p>
+              <p class="daily-detail-card__info">
+                <span id="visibility">6.4</span> miles
+              </p>
+            </div>
+            <div class="daily-detail-card">
+              <p>Air Pressure</p>
+              <p class="daily-detail-card__info">
+                <span id="airp">998</span> mb
+              </p>
+            </div>
+          </div>
+          <footer class="atribution">
+            created by
+            <a href="https://github.com/alexign473" target="_blank"
+              >Alex Ignatev</a
+            >
+          </footer>
+        </div>
+      </main>
+    </div>
+    <script></script>
   </body>
 </html>
