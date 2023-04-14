@@ -13,8 +13,10 @@ const App = () => {
   const $currLocation = document.querySelector('#currLocation');
   const $currDate = document.querySelector('#currDate');
 
+  const $sidebar = document.querySelector('.sidebar');
+  const $error = document.querySelector('.sidebar__error');
+  const $openSidebarBtn = document.querySelector('#openSidebarBtn');
   const $closeSidebarBtn = document.querySelector('#closeSidebarBtn');
-  const $error = document.querySelector('#error');
   const $searchForm = document.querySelector('#searchForm');
   const $searchInput = $searchForm.querySelector('input');
 
@@ -25,6 +27,10 @@ const App = () => {
     $currStatus.textContent = current.condition.text;
     $currLocation.textContent = `${location.name}, ${location.country}`;
     console.log(forecast.forecastday);
+  };
+
+  const toggleSidebar = (open) => {
+    $sidebar.classList.toggle('active', open);
   };
 
   const setLoadingBtn = (loading) => {
@@ -47,6 +53,7 @@ const App = () => {
       console.log(data);
       state.data = data;
       updateView();
+      toggleSidebar(false);
     } catch (err) {
       state.error = true;
       console.log('error', state);
@@ -64,10 +71,12 @@ const App = () => {
     e.preventDefault();
     const { value } = $searchInput;
     if (value.trim() === '') return;
-    console.log(value);
     getData(value);
+    $searchInput.value = '';
   };
 
+  $openSidebarBtn.addEventListener('click', () => toggleSidebar(true));
+  $closeSidebarBtn.addEventListener('click', () => toggleSidebar(false));
   $searchForm.addEventListener('submit', handleSubmit);
 };
 

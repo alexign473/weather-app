@@ -13,13 +13,8 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      .hidden {
-        display: none;
-      }
-    </style>
   </head>
-  <body>
+  <body class="preload">
     <aside class="sidebar">
       <i id="closeSidebarBtn" class="close fa-solid fa-xmark"></i>
       <form id="searchForm" class="sidebar__searchbar">
@@ -32,13 +27,13 @@
           <span> Search </span>
         </button>
       </form>
-      <h2 id="error" class="sidebar__error"></h2>
+      <h2 class="sidebar__error"></h2>
     </aside>
 
     <div id="viewApp" class="wrapper">
       <div class="weather-current">
         <div class="weather-current__searchbar">
-          <button>Search for places</button>
+          <button id="openSidebarBtn">Search for places</button>
           <span></span>
         </div>
         <div class="weather-current__content">
@@ -145,5 +140,6 @@
         </div>
       </main>
     </div>
+    <script></script>
   </body>
 </html>
