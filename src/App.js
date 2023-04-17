@@ -48,9 +48,10 @@ const App = () => {
   const updateView = (data) => {
     if (!data) return;
     const { current, location, forecast } = data;
-    const { text, code } = current.condition;
+    const { text, code, icon } = current.condition;
     renderForecast(forecast.forecastday);
-    $currImg.src = `./assets/${imageByCode(code)}.png`;
+    const img = imageByCode(code);
+    $currImg.src = `${img ? `./assets/${img}.png` : icon}`;
     $currTemp.textContent = Math.round(current.temp_c);
     $currStatus.textContent = text;
     $currLocation.textContent = `${location.name}, ${location.country}`;

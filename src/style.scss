@@ -208,6 +208,10 @@ button {
   &__img {
     width: 150px;
     margin-bottom: 40px;
+
+    img {
+      width: 100%;
+    }
   }
 
   &__temp {

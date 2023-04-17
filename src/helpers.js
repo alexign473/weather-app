@@ -1,10 +1,11 @@
 const imageByCode = (code) => {
+  console.log(code);
   switch (code) {
     case 1000:
       return 'Clear';
     case 1003:
     case 1006:
-    case 1030:
+      // case 1030:
       return 'LightCloud';
 
     case 1009:
