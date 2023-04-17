@@ -2,13 +2,6 @@ import searchQuery from './api';
 import { imageByCode } from './helpers';
 
 const App = () => {
-  console.log('App');
-  const state = {
-    loading: null,
-    error: null,
-    data: null,
-  };
-
   const $currTemp = document.querySelector('#currTemp');
   const $currStatus = document.querySelector('#currStatus');
   const $currLocation = document.querySelector('#currLocation');
@@ -23,13 +16,14 @@ const App = () => {
   const $searchInput = $searchForm.querySelector('input');
 
   const $forecast = document.querySelector('#forecast');
+  const $wind = document.querySelector('#wind');
+  const $humidity = document.querySelector('#humidity');
+  const $visibility = document.querySelector('#visibility');
+  const $airp = document.querySelector('#airp');
 
   const createForecastCard = (item) => {
     const { code, text, icon } = item.day.condition;
-    console.log('========');
-    console.log(text, code, icon);
     const img = imageByCode(code);
-    console.log(img);
     const src = `${img ? `./assets/${img}.png` : icon}`;
     const card = document.createElement('div');
     card.className = 'forecast-card';
@@ -51,15 +45,19 @@ const App = () => {
     $forecast.append(...itemsToShow.map(createForecastCard));
   };
 
-  const updateView = () => {
-    if (!state.data) return;
-    const { current, location, forecast } = state.data;
+  const updateView = (data) => {
+    if (!data) return;
+    const { current, location, forecast } = data;
     const { text, code } = current.condition;
+    renderForecast(forecast.forecastday);
     $currImg.src = `./assets/${imageByCode(code)}.png`;
     $currTemp.textContent = Math.round(current.temp_c);
     $currStatus.textContent = text;
     $currLocation.textContent = `${location.name}, ${location.country}`;
-    renderForecast(forecast.forecastday);
+    $wind.textContent = current.wind_mph;
+    $humidity.textContent = current.humidity;
+    $visibility.textContent = current.vis_miles;
+    $airp.textContent = current.pressure_mb;
   };
 
   const toggleSidebar = (open) => {
@@ -79,25 +77,18 @@ const App = () => {
   };
 
   const getData = async (query) => {
-    state.loading = true;
     setLoadingBtn(true);
     $error.textContent = '';
-    console.log('loading', state);
 
     try {
       const data = await searchQuery(query);
       console.log(data);
-      state.data = data;
-      updateView();
+      updateView(data);
       toggleSidebar(false);
     } catch (err) {
-      state.error = true;
-      console.log('error', state);
       $error.textContent = err;
     } finally {
-      state.loading = false;
       setLoadingBtn(false);
-      console.log('finally', state);
     }
   };
 
