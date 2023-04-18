@@ -1,13 +1,19 @@
-const imageByCode = (code) => {
-  console.log(code);
+import dayjs from 'dayjs';
+import isTomorrow from 'dayjs/plugin/isTomorrow';
+
+dayjs.extend(isTomorrow);
+
+export const formatDate = (date) => dayjs(date).format('ddd, D MMM');
+
+export const dateIsTomorrow = (date) => dayjs(date).isTomorrow();
+
+export const imageByCode = (code) => {
   switch (code) {
     case 1000:
       return 'Clear';
     case 1003:
     case 1006:
-      // case 1030:
       return 'LightCloud';
-
     case 1009:
       return 'HeavyCloud';
     case 1150:
@@ -59,5 +65,3 @@ const imageByCode = (code) => {
       return false;
   }
 };
-
-export { imageByCode };

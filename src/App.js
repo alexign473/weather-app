@@ -1,5 +1,7 @@
 import searchQuery from './api';
-import { imageByCode } from './helpers';
+import { imageByCode, formatDate, dateIsTomorrow } from './helpers';
+
+const TODAY = new Date();
 
 const App = () => {
   const $currTemp = document.querySelector('#currTemp');
@@ -21,19 +23,21 @@ const App = () => {
   const $visibility = document.querySelector('#visibility');
   const $airp = document.querySelector('#airp');
 
+  $currDate.textContent = formatDate(TODAY);
+
   const createForecastCard = (item) => {
     const { code, text, icon } = item.day.condition;
     const img = imageByCode(code);
     const src = `${img ? `./assets/${img}.png` : icon}`;
+    const date = dateIsTomorrow(item.date) ? 'Tomorrow' : formatDate(item.date);
     const card = document.createElement('div');
     card.className = 'forecast-card';
     card.innerHTML = `
-              <p>${item.date}</p>
+              <p>${date}</p>
               <img src="${src}" alt="${text}" />
-              <div>${item.day.condition.text}</div>
               <div class="forecast-card__info">
-                <span>${item.day.maxtemp_c}&deg;C</span>
-                <span>${item.day.mintemp_c}&deg;C</span>
+                <span>${Math.round(item.day.maxtemp_c)}&deg;C</span>
+                <span>${Math.round(item.day.mintemp_c)}&deg;C</span>
               </div>
     `;
     return card;
@@ -83,7 +87,6 @@ const App = () => {
 
     try {
       const data = await searchQuery(query);
-      console.log(data);
       updateView(data);
       toggleSidebar(false);
     } catch (err) {

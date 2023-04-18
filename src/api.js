@@ -4,7 +4,7 @@ const KEY = '3babf595b26c4b1482c111127231004';
 const searchQuery = async (query) => {
   try {
     const res = await fetch(
-      `${URL}?key=${KEY}&q=${query}&days=4&aqi=no&alerts=no`,
+      `${URL}?key=${KEY}&q=${query}&days=6&aqi=no&alerts=no`,
       { mode: 'cors' }
     );
     const data = await res.json();

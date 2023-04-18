@@ -22,6 +22,9 @@
     "url": "https://github.com/alexign473/weather-app/issues"
   },
   "homepage": "https://github.com/alexign473/weather-app#readme",
+  "dependencies": {
+    "dayjs": "^1.11.7"
+  },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
