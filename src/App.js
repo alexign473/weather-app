@@ -30,6 +30,7 @@ const App = () => {
     const img = imageByCode(code);
     const src = `${img ? `./assets/${img}.png` : icon}`;
     const date = dateIsTomorrow(item.date) ? 'Tomorrow' : formatDate(item.date);
+
     const card = document.createElement('div');
     card.className = 'forecast-card';
     card.innerHTML = `
@@ -44,16 +45,14 @@ const App = () => {
   };
 
   const renderForecast = (forecast) => {
+    // Delete first item of array === current day
     const itemsToShow = forecast.slice(1);
     $forecast.innerHTML = '';
     $forecast.append(...itemsToShow.map(createForecastCard));
   };
 
-  const updateView = (data) => {
-    if (!data) return;
-    const { current, location, forecast } = data;
+  const updateCurrent = (current, location) => {
     const { text, code, icon } = current.condition;
-    renderForecast(forecast.forecastday);
     const img = imageByCode(code);
     $currImg.src = `${img ? `./assets/${img}.png` : icon}`;
     $currTemp.textContent = Math.round(current.temp_c);
@@ -63,6 +62,13 @@ const App = () => {
     $humidity.textContent = current.humidity;
     $visibility.textContent = current.vis_miles;
     $airp.textContent = current.pressure_mb;
+  };
+
+  const updateView = (data) => {
+    if (!data) return;
+    const { current, location, forecast } = data;
+    renderForecast(forecast.forecastday);
+    updateCurrent(current, location);
   };
 
   const toggleSidebar = (open) => {
