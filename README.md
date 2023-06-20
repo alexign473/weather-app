@@ -4,7 +4,7 @@
 
 ![](./screenshot.png)
 
-## [Live](https://alexign473.github.io/weather-app/)
+## [Live](https://isikava.github.io/weather-app/)
 
 Search for forecast the weather. Using fetch and [weatherapi](https://www.weatherapi.com/).
 
